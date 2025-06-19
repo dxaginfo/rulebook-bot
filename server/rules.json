@@ -1,0 +1,41 @@
+{
+  "traveling": "A player who receives the ball while standing still may pivot, using either foot as the pivot foot. Once established, the pivot foot may not be lifted before the ball is released on a pass or shot. If a player jumps with the ball, they must release it before landing. A traveling violation occurs when a player holding the ball moves one or both feet illegally.",
+  
+  "double dribble": "Double dribble is a violation that occurs when a player dribbles the ball with both hands simultaneously or when a player picks up the dribble and then dribbles again without passing or shooting.",
+  
+  "shot clock": "The shot clock in the NBA is 24 seconds. Teams must attempt a shot that hits the rim before the shot clock expires, or they lose possession. The shot clock resets to 14 seconds in certain situations, such as offensive rebounds.",
+  
+  "three-second rule": "The three-second rule prohibits offensive players from remaining in the restricted area (the paint) for more than three consecutive seconds while their team has the ball. There is also a defensive three-second rule that prevents defenders from staying in the paint for more than three seconds unless they are actively guarding an opponent.",
+  
+  "goaltending": "Goaltending is touching the ball on its downward flight toward the basket, or after it has touched the backboard while the ball is above the rim level. This results in the basket being counted if committed by the defense, or a violation if committed by the offense.",
+  
+  "personal foul": "A personal foul is illegal physical contact that occurs with an opponent. A player cannot push, hold, charge into, impede the progress of an opponent by extending an arm or shoulder, or use any rough tactics. Players are allowed 6 personal fouls in a game before fouling out.",
+  
+  "technical foul": "A technical foul is a violation of the rules that does not involve physical contact during gameplay. It can be called for unsportsmanlike conduct, excessive complaining, delay of game, or various procedural issues. Players and coaches receive an automatic ejection upon receiving their second technical foul in a game.",
+  
+  "flagrant foul": "A flagrant foul is unnecessary and/or excessive contact committed by a player against an opponent. Flagrant fouls are categorized as either Flagrant 1 (unnecessary contact) or Flagrant 2 (unnecessary and excessive contact), with the latter resulting in automatic ejection.",
+  
+  "clear path foul": "A clear path foul occurs when a defender fouls an offensive player who has a clear path to the basket without any defenders between them and the basket. This results in two free throws and possession of the ball.",
+  
+  "backcourt violation": "Once the offensive team gets the ball over the half-court line, they cannot bring it back across the line. If they do, it's a backcourt violation and the defending team gets possession.",
+  
+  "offensive interference": "Offensive interference occurs when an offensive player touches the ball while it is on or in the cylinder above the rim, or touches the ball when it is above the rim during a shot attempt. This results in a violation and loss of possession.",
+  
+  "defensive three-second rule": "A defensive player cannot remain in the restricted area (the paint) for more than three consecutive seconds unless they are actively guarding an opponent. Violation results in a technical foul with one free throw awarded to the offensive team.",
+  
+  "out of bounds": "The ball is out of bounds when it touches a player who is out of bounds, or any other person, the floor, or any object on, above, or outside a boundary line. The team that did not touch the ball last before it went out of bounds gets possession.",
+  
+  "inbounding": "When inbounding the ball, the player must release the ball within 5 seconds. They cannot step on or over the boundary line while possessing the ball. No other player may cross the boundary line while the ball is being inbounded.",
+  
+  "jump ball": "A jump ball occurs at the beginning of the game and each overtime period, as well as in certain situations when possession is unclear. The referee tosses the ball between two opposing players who may tap it to teammates.",
+  
+  "free throws": "Free throws are awarded after certain fouls. The player must shoot within 10 seconds of receiving the ball and cannot cross the free throw line until the ball touches the rim. Other players cannot enter the lane until the ball leaves the shooter's hands.",
+  
+  "coach's challenge": "Each team is allowed one coach's challenge per game, which they retain if successful. Coaches can challenge called fouls, out-of-bounds decisions, goaltending, and basket interference calls in the last two minutes of the fourth quarter and overtime.",
+  
+  "timeout rules": "Each team has seven timeouts per game, with a maximum of four in the fourth quarter. Timeouts can be either 60 seconds (full) or 20 seconds (short). Teams are limited to two timeouts in the final two minutes of the fourth quarter.",
+  
+  "basket interference": "Basket interference occurs when a player touches the ball or the basket when the ball is on the rim. It also includes touching the ball while it is in the imaginary cylinder above the rim. When committed by the defense, the points are awarded; when committed by the offense, no points are scored and possession changes.",
+  
+  "hand checking": "Hand checking is illegal contact with an opponent using the hand or forearm, which impedes the progress of the player with the ball. This was strictly enforced beginning in the 2004-05 season to promote more offensive freedom of movement."
+}

@@ -1,18 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
   isLoading: boolean;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, inputRef }) => {
   const [input, setInput] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Focus the input when the component mounts
-    inputRef.current?.focus();
-  }, []);
+    inputRef?.current?.focus();
+  }, [inputRef]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

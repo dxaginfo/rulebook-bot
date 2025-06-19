@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import MessageList from './components/MessageList';
 import ChatInput from './components/ChatInput';
 import Header from './components/Header';
+import QuickRuleReference from './components/QuickRuleReference';
 import { Message } from './types';
 import { sendMessage } from './services/api';
 
@@ -15,11 +16,26 @@ const App: React.FC = () => {
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showRuleReference, setShowRuleReference] = useState(false);
   const messageEndRef = useRef<null | HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  useEffect(() => {
+    // Listen for suggestion clicks from the Header component
+    const handleSuggestionClick = (event: CustomEvent) => {
+      handleSendMessage(event.detail);
+    };
+    
+    document.addEventListener('suggestion-click', handleSuggestionClick as EventListener);
+    
+    return () => {
+      document.removeEventListener('suggestion-click', handleSuggestionClick as EventListener);
+    };
+  }, []);
 
   const handleSendMessage = async (text: string) => {
     if (!text.trim()) return;
@@ -105,16 +121,61 @@ const App: React.FC = () => {
       return 'Goaltending is touching the ball on its downward flight toward the basket, or after it has touched the backboard while the ball is above the rim level. This results in the basket being counted if committed by the defense, or a violation if committed by the offense.';
     }
     
+    if (lowerQuestion.includes('backcourt') || lowerQuestion.includes('back court')) {
+      return 'Once the offensive team gets the ball over the half-court line, they cannot bring it back across the line. If they do, it\'s a backcourt violation and the defending team gets possession.';
+    }
+    
+    if (lowerQuestion.includes('flagrant')) {
+      return 'A flagrant foul is unnecessary and/or excessive contact committed by a player against an opponent. Flagrant fouls are categorized as either Flagrant 1 (unnecessary contact) or Flagrant 2 (unnecessary and excessive contact), with the latter resulting in automatic ejection.';
+    }
+    
     return "I don't have specific information about that rule in my knowledge base. For the most accurate and up-to-date information, please consult the official NBA rulebook or visit the NBA's official website.";
+  };
+
+  const handleRuleReferenceToggle = () => {
+    setShowRuleReference(!showRuleReference);
+  };
+
+  const handleRuleClick = (ruleText: string) => {
+    handleSendMessage(ruleText);
+    // Focus the input after clicking a rule
+    setTimeout(() => inputRef.current?.focus(), 100);
   };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <Header />
+      <div className="flex justify-end mb-2">
+        <button 
+          onClick={handleRuleReferenceToggle}
+          className="text-sm flex items-center gap-1 text-nba-blue hover:text-blue-700 transition-colors"
+        >
+          {showRuleReference ? (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+              </svg>
+              Hide Rule Reference
+            </>
+          ) : (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+              Show Rule Reference
+            </>
+          )}
+        </button>
+      </div>
+      {showRuleReference && <QuickRuleReference onRuleClick={handleRuleClick} />}
       <div className="chat-container">
         <MessageList messages={messages} />
         <div ref={messageEndRef} />
-        <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+        <ChatInput 
+          onSendMessage={handleSendMessage} 
+          isLoading={isLoading} 
+          inputRef={inputRef} 
+        />
       </div>
     </div>
   );

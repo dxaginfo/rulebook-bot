@@ -8,7 +8,7 @@ body {
 }
 
 .chat-container {
-  height: calc(100vh - 180px);
+  height: calc(100vh - 220px);
   @apply bg-white rounded-lg shadow-md overflow-hidden;
 }
 
@@ -35,4 +35,15 @@ body {
 
 .input-field {
   @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-nba-blue;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 640px) {
+  .chat-container {
+    height: calc(100vh - 280px);
+  }
+  
+  .message {
+    @apply max-w-[90%];
+  }
 }
