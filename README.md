@@ -8,6 +8,9 @@ An AI-powered NBA rulebook chatbot that answers questions from fans, journalists
 - Responsive design that works on desktop and mobile devices
 - AI-powered responses based on official NBA rules
 - Real-time feedback with loading indicators
+- Quick rule reference guide with search functionality
+- Visual rule illustrations and historical context
+- Categorized rule browsing
 
 ## Tech Stack
 
@@ -69,13 +72,23 @@ The RuleBook Bot uses the OpenAI API to generate responses to user questions abo
 
 When a user asks a question, the application sends the question along with the rules context to the OpenAI API, which generates a response based on the provided information.
 
+## New Features in Latest Update
+
+- **Enhanced Rule Details**: Added comprehensive rule information including historical context
+- **Visual Rule Illustrations**: Added visual examples for common rules
+- **Search Functionality**: Implemented search within the quick rule reference
+- **Rule Categorization**: Rules are now organized by category for easier browsing
+- **Improved UI/UX**: Better layout and interaction design for all components
+
 ## Future Enhancements
 
 - Add a larger dataset of NBA rules and regulations
-- Implement search functionality to find specific rules
+- Implement advanced search functionality to find specific rules
 - Add user authentication for personalized experiences
 - Include video examples of rules in action
 - Implement a feedback system to improve responses over time
+- Add rule comparison feature
+- Support for multiple basketball rule sets (NBA, FIBA, NCAA, etc.)
 
 ## License
 
