@@ -14,6 +14,25 @@ const Header: React.FC = () => {
       <p className="text-gray-600 max-w-2xl mx-auto">
         Your AI assistant for NBA rules and regulations. Ask me any question about game rules, officiating, or procedural guidelines.
       </p>
+      <div className="mt-4 text-sm text-gray-500">
+        <p>Try asking questions like:</p>
+        <div className="flex flex-wrap justify-center gap-2 mt-2">
+          {[
+            'What is traveling in basketball?',
+            'Explain the shot clock rule',
+            'How many fouls before fouling out?',
+            'What is a technical foul?'
+          ].map((suggestion, index) => (
+            <button
+              key={index}
+              className="px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200 text-gray-700 text-xs transition-colors"
+              onClick={() => document.dispatchEvent(new CustomEvent('suggestion-click', { detail: suggestion }))}
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      </div>
     </header>
   );
 };

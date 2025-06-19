@@ -3,6 +3,7 @@ import MessageList from './components/MessageList';
 import ChatInput from './components/ChatInput';
 import Header from './components/Header';
 import { Message } from './types';
+import { sendMessage } from './services/api';
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -35,23 +36,28 @@ const App: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // In a real application, you would call your API here
-      // For now, we'll simulate a response after a short delay
-      setTimeout(() => {
-        const botResponse = generateBotResponse(text);
-        const botMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          text: botResponse,
-          sender: 'bot',
-          timestamp: new Date(),
-        };
-        
-        setMessages((prev) => [...prev, botMessage]);
-        setIsLoading(false);
-      }, 1000);
+      // Call the API to get a response
+      let botResponse: string;
+      
+      // If the API is available, use it
+      try {
+        botResponse = await sendMessage(text);
+      } catch (apiError) {
+        console.warn('API call failed, falling back to local responses:', apiError);
+        // Fallback to local responses if API fails
+        botResponse = generateLocalResponse(text);
+      }
+
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: botResponse,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      
+      setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Error getting response:', error);
-      setIsLoading(false);
       
       // Add error message
       const errorMessage: Message = {
@@ -62,12 +68,13 @@ const App: React.FC = () => {
       };
       
       setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Simple rule-based responses for demo purposes
-  // In a real application, this would be replaced with an API call to a language model
-  const generateBotResponse = (question: string): string => {
+  // Fallback responses for when the API is not available
+  const generateLocalResponse = (question: string): string => {
     const lowerQuestion = question.toLowerCase();
     
     if (lowerQuestion.includes('travel') || lowerQuestion.includes('traveling')) {
