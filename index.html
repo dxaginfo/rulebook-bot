@@ -1,13 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RuleBook Bot - NBA Rules Chatbot</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuleBook Bot - NBA Rules Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+    <header class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                    </svg>
+                    <h1 class="text-3xl font-bold">RuleBook Bot</h1>
+                </div>
+                <div>
+                    <span class="text-sm opacity-75">Your NBA Rules Assistant</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Sidebar -->
+            <div class="col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-xl font-semibold mb-4">Rule Categories</h2>
+                    <ul class="space-y-2" id="rule-categories">
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="general">General Rules</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="violation">Violations</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="foul">Fouls & Penalties</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="shotclock">Shot Clock Rules</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="substitution">Substitutions</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="timeout">Timeouts</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="overtime">Overtime Rules</button></li>
+                        <li><button class="category-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition" data-category="playoff">Playoff Specifics</button></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold mb-4">Common Questions</h2>
+                    <ul class="space-y-2" id="common-questions">
+                        <li><button class="question-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition text-sm">What is the NBA shot clock rule?</button></li>
+                        <li><button class="question-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition text-sm">How many timeouts are allowed in an NBA game?</button></li>
+                        <li><button class="question-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition text-sm">What constitutes a flagrant foul?</button></li>
+                        <li><button class="question-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition text-sm">How is a clear path foul defined?</button></li>
+                        <li><button class="question-btn w-full text-left py-2 px-3 rounded hover:bg-blue-100 transition text-sm">What is the NBA goaltending rule?</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-span-1 lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md mb-6">
+                    <!-- Chat interface -->
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-semibold">Ask About NBA Rules</h2>
+                        <p class="text-gray-600 text-sm mt-1">Type your question about NBA rules and get accurate answers with references.</p>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Chat history display -->
+                        <div id="chat-history" class="space-y-4 mb-6 max-h-96 overflow-y-auto">
+                            <div class="bot-message p-4 bg-gray-100 rounded-lg">
+                                <p>Hello! I'm RuleBook Bot, your NBA rules assistant. Ask me any questions about NBA rules, violations, fouls, or game procedures.</p>
+                            </div>
+                        </div>
+
+                        <!-- Chat input form -->
+                        <form id="question-form" class="flex">
+                            <input type="text" id="question-input" class="flex-grow border rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ask about NBA rules...">
+                            <button type="submit" class="bg-blue-700 text-white px-6 py-3 rounded-r-lg hover:bg-blue-800 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Rule Explanation Card -->
+                <div id="rule-explanation-card" class="bg-white rounded-lg shadow-md p-6 hidden">
+                    <h2 id="rule-title" class="text-xl font-semibold mb-2">Rule Title</h2>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <span id="rule-section" class="mr-3">Section: 0.0</span>
+                        <span id="rule-page">Page: 00</span>
+                    </div>
+                    <div id="rule-content" class="prose max-w-none">
+                        <!-- Rule content will be inserted here -->
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h3 class="font-semibold text-lg mb-2">Related Rules</h3>
+                        <div id="related-rules" class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <!-- Related rule links will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2025 RuleBook Bot. This is not affiliated with the NBA.</p>
+                    <p class="text-sm text-gray-400 mt-1">For educational purposes only.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Terms</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Privacy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl flex items-center">
+            <div class="spinner mr-4"></div>
+            <p>Consulting the rulebook...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/rules-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
 </html>

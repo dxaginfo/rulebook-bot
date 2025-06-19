@@ -1,0 +1,116 @@
+/* Custom styles for RuleBook Bot */
+
+/* Font settings */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Chat message styling */
+.user-message {
+    background-color: #f0f7ff;
+    border-left: 4px solid #3b82f6;
+}
+
+.bot-message {
+    background-color: #f3f4f6;
+    border-left: 4px solid #6b7280;
+}
+
+/* Loading spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border-left-color: #3b82f6;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Rule category buttons active state */
+.category-btn.active {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* Highlight search terms in results */
+.highlight {
+    background-color: #fef08a;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Table styles for rule content */
+#rule-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+#rule-content th, #rule-content td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+#rule-content th {
+    background-color: #f3f4f6;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    #rule-explanation-card {
+        margin-top: 1.5rem;
+    }
+    
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Animation for new chat messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-history > div:last-child {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Rule content formatting */
+#rule-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+#rule-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+#rule-content ul, #rule-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+#rule-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Code for rule references */
+.rule-reference {
+    font-family: monospace;
+    background-color: #f3f4f6;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
